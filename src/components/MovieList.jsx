@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import getMovies from "../utils/getMovies";
 
-function MovieList() {
+function MovieList(props) {
+  useEffect(() => {
+    getMovies(params.id)
+    console.log("aca estoy")
+  })
+  const params = useParams()
+  console.log(params)
+
   const state = useSelector(state => state.movies)
-  console.log(state)
   const movies = Object.values(state["movies"])
   
   return (

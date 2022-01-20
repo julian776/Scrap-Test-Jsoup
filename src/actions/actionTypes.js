@@ -5,4 +5,12 @@ export const FAILURE = 'LOAD_FAILURE'
 
 export const LOAD_SUCCESS = 'LOAD_SUCCESS'
 
+export const SECTIONS_LOADING = 'SECTIONS_LOADING'
+
+export const SECTIONS_FAILURE = 'SECTIONS_FAILURE'
+
+export const SECTIONS_SUCCESS = 'SECTIONS_SUCCESS'
+
+
+
 
