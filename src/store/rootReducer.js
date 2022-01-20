@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import CourseReducer from '../reducers/CourseReducer'
+import MoviesReducer from '../reducers/MoviesReducer'
 
 const rootReducer = () => {
   return combineReducers(
     {
-      courses: CourseReducer
+      movies: MoviesReducer
     }
   )
 }

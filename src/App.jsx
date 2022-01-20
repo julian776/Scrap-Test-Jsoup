@@ -1,28 +1,27 @@
-import { useEffect } from 'react'
-import { getCourse } from './utils/get'
-import { useDispatch } from 'react-redux'
+import MovieList from './components/MovieList'
+import getMovies from './utils/getMovies'
 
 function App () {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getCourse('bbbb'))
-  }, [])
 
+  getMovies()
+  /*
   useEffect(() => {
-    const socket = new WebSocket('ws://' + 'localhost:8080' + '/retrieve/' + 'bbbb')
+    const ws = new WebSocket('ws://' + 'localhost:8080' + '')
     socket.onmessage = function (m) {
       const data = JSON.parse(m.data)
-      dispatch(data.type)
+      dispatch(moviesLoad(data))
       console.log('Got message: ' + data.type)
     }
   }, [])
+  */
 
   return (
     <div className='App'>
-      <h1>oe</h1>
-
+      <img className='page-icon' src="https://cuevana3.io/wp-content/themes/cuevana3/public/img/cnt/cuevana3.png" alt="cuevana" srcset="" />
+      <MovieList />
     </div>
   )
 }
 
 export default App
+
