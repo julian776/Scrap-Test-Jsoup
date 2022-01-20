@@ -2,21 +2,25 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function MovieList() {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.movies)
+  console.log(state)
+  const movies = Object.values(state["movies"])
   
   return (
     <div className="movie-list">
-      <ul>
+      {movies ? <ul>
         {movies.map((movie) => {
           return (
-            <div className="movie-container">
-              <img className="cover" src={movie.image} alt={movie.title} />
-              <h6 className="title">{movie.year} - {movie.title}</h6>
-              <button className='button-movie' onClick={() => {window.location.replace(movie.link)}}>Ver</button>
+            <div key={movie.id} className="movie-container">
+              <img className="cover" src={movie.url_image} alt={movie.name} />
+              <h6 className="title">{movie.name}</h6>
+              <button className='button-movie' onClick={() => {window.location.replace(movie.url_video)}}>Ver</button>
             </div>
           );
         })}
-      </ul>
+      </ul> : ""}
+      {state["isLoading"] ? <h3>Cargando</h3> : ""}
+      {state["error"] ? <h3>Error en las peliculas</h3> : ""}
     </div>
   );
 }
@@ -31,4 +35,5 @@ const movies = [
     year: 2021,
     title: "Hola soy la pelicula",
   },
-];*/
+];
+*/

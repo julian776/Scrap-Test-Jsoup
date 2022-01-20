@@ -2,8 +2,8 @@ import { LOAD_SUCCESS, LOADING, FAILURE } from "../actions/actionTypes";
 
 const initialState = {
     isLoading: false,
-    movies: null,
-    error: null
+    movies: [],
+    error: false
 }
 
 const MoviesReducer = (state = initialState, action) => {

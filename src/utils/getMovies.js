@@ -1,19 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { moviesFailed, moviesLoad } from '../actions/actionsMovies';
+import { moviesFailed, moviesLoad, moviesLoading } from '../actions/actionsMovies';
 import URL from './URL';
 
 async function getMovies() {
 
     const dispatch = useDispatch()
     
-    dispatch(moviesLoad())
+    dispatch(moviesLoading())
 
     try {
-        const data = await fetch(`${URL}/action`)
-        .then(response => response.json())
-        dispatch(moviesLoad(data.movies))
-        console.log(data.map((o) => {console.log(o.movies)}))
+        const response = await fetch(`${URL}/action`)
+        const data = await response.json()
+        const movies = data[0].movies
+        dispatch(moviesLoad(movies))
     } catch (e) {
         dispatch(moviesFailed())
     }

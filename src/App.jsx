@@ -2,7 +2,7 @@ import MovieList from './components/MovieList'
 import getMovies from './utils/getMovies'
 
 function App () {
-
+  
   getMovies()
   /*
   useEffect(() => {
