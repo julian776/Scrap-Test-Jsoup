@@ -1,18 +1,31 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import getMovies from "../utils/getMovies";
+//import getMovies from "../utils/getMovies";
+import URL from "../utils/URL";
 
 function MovieList(props) {
-  useEffect(() => {
-    getMovies(params.id)
-    console.log("aca estoy")
-  })
-  const params = useParams()
-  console.log(params)
 
-  const state = useSelector(state => state.movies)
-  const movies = Object.values(state["movies"])
+  const params = useParams()
+  const [movies, setMovies] = useState([])
+
+  useEffect(() => {
+    try {
+      console.log("param: " + params.id)
+      console.log(`${URL}/section/${params.id}`)
+      fetch(`${URL}/section/${params.id}`)
+      .then((data) => data.json())
+      .then(algo => {
+        console.log(algo[0].movies)
+        let lista = Object.values(algo[0].movies)
+        setMovies([...movies, ...lista])
+        console.log(movies)
+      })
+    } catch (e) {
+      console.log("Error in getMopveis")
+    }
+  }, [])
+
+  console.log(movies)
   
   return (
     <div className="movie-list">
@@ -27,21 +40,8 @@ function MovieList(props) {
           );
         })}
       </ul> : ""}
-      {state["isLoading"] ? <h3>Cargando</h3> : ""}
-      {state["error"] ? <h3>Error en las peliculas</h3> : ""}
     </div>
   );
 }
 
 export default MovieList;
-
-/*
-const movies = [
-  {
-    link: "//apialfa.tomatomatela.com/ir/player.php?h=a3FwYW05dkllMFg0d1hha1BOdVJGNWIxMisyZ2t4UkNjazUwTG52eUw3amoycHJsN2RPNzIxVlExREdZaW5VWm9yWFdPNmF4dWxzYkZRRFdVRlN4MytScmpsUDU2NDI4cUVCL2NsYlkvcVovb2ZsK0d4TEVOMHJob0dGUVNXdXM0dUZORk15SktaM3c2QXh0eXZXdzhYN055N1gxOUpkbHh1N1FHWUQzOTFtS2ZmUXcyenZmZG1CbE12SU5JQkhHZ254YTBQSWtXNmlZOWlQVXVBcmJDdUd6ckxWWjc1MnZWMWRpNWJoQXhoRXk1eUVRK3RmUUpnT1pmckZtNzRQOHZvV3hGWFJxL0pQeE93ZUNiNnl0ZWY0eTFJR3BEb0ZWT2NsM0xia2dHWUJHUTZJbE1XOEVMRFhHRUxmSXd4bmtEZXFCdHNCT2xtRUk0U0pML0ZDUmV3PT0",
-    image:"https://cuevana3.io/wp-content/uploads/2022/01/el-buen-patron-53512-poster-200x300.jpg",
-    year: 2021,
-    title: "Hola soy la pelicula",
-  },
-];
-*/

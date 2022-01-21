@@ -6,20 +6,23 @@ import { Link } from 'react-router-dom';
 function Home() {
 
     const state = useSelector(state => state.sections)
-    console.log(state)
     const sections = state["sections"]
 
     return (
         <Fragment>
+        <div className='section-container'>
         <nav>
         {sections ? <ul>
             {sections.map((section => {
-                return <button className='button-movie'><Link to={`/section/${section}`} >{section}</Link>                    </button>
+                return <li className='section-li'>
+                    <button className='button-section'><Link to={`/section/${section}`} >{section}</Link></button>
+                    </li>
             }))}
         </ul> : ""}
         {state.isLoading ? <h2>Loading...</h2> : "" }
         {state.error ? <h2>Error</h2> : ""} 
         </nav>
+        </div>
         </Fragment>
     )
 }
